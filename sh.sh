@@ -1,28 +1,22 @@
 #!/bin/bash
-# This is a sample Bash script
-# Print "Hello, World!"
-echo $hk
+echo Please enter the URL to check :
+read url
+export url
+rfesponse=$(curl -s -0 /dev/null -w"%{http_code}" "$url")
+#http_code=$(curl -s -o /dev/null -w "%{http_code}" "$url")
 
-if [ -f "firsstsh.sh" ] ; then
+#echo $rfesponse > $http_code.txt
 
-echo "is there"
+if [ "$rfesponse" -eq 200 ]; then
+echo Requested URL is success with http_code code "$rfesponse"
 else
-echo "no there"
+echo Requested url is failure with http_code code "$rfesponse"
 fi
+echo Enter the file name to replace:
+read file
+export file
+cat $file
+echo -------------------POST replace----------------------------------
+sed -i '5, $ {/^Welcome/ s/give/learning/g}' "$file"
 
-echo my script is $0
-echo my f $1
-echo my f $2
-echo my f $@
-echo my f $#
-
-x="5 4 5 6" 
-for X in $x; do
-echo fuck $X
-done
-
-h=25
-while  [ $h -ge 20 ]; do
-echo $h 
-((h--))
-done
+cat $file
