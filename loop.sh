@@ -29,3 +29,9 @@ until [ $x -eq 5 ]; do
 echo $x
 ((x++))
 done
+
+if [ -f "guvi.txt" ]; then
+echo it exist
+else
+echo no
+fi
